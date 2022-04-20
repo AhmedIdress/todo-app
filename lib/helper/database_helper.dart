@@ -16,13 +16,19 @@ class DataBaseHelper {
   }
 
   Future<Database> initDb() async {
-    String path = join(await getDatabasesPath(), 'userData.db');
+    String path = join(
+        await getDatabasesPath(),
+        'userData.db');
     return await openDatabase(
       path,
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
-            'CREATE TABLE $tableName ($userId INTEGER PRIMARY KEY, $userName TEXT NOT NULL, $userEmail TEXT NOT NULL, $userPhone TEXT NOT NULL)');
+            'CREATE TABLE $tableName ('
+                '$userId INTEGER PRIMARY KEY, '
+                '$userName TEXT NOT NULL, '
+                '$userEmail TEXT NOT NULL, '
+                '$userPhone TEXT NOT NULL)');
         _database = db;
       },
     );
